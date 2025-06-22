@@ -1,0 +1,127 @@
+A BRIEF DESCRIPTION OF WHAT I DID IN THIS PROJECT 
+
+In programming, abstraction means hiding repetitive or complex implementation details behind a simple, reusable interface. 
+Instead of repeating the same code in every file, we write it once in a common component and reuse it.
+
+Goal of Abstraction here :
+
+=> All of them have input and output handles.
+
+=> Each node had a title, layout, and children elements.
+
+=> You were repeating the same layout and structure code again and again.
+-----------------------------------------------------------------------------------
+Why Was Abstraction Needed?
+Without abstraction:
+
+You would write the same code (div, handles, title, structure) in every node file.
+
+This makes it hard to maintain (any change has to be done in all files).
+
+Code becomes longer and harder to read.
+
+There's higher chance of inconsistency between node UIs.
+
+With abstraction (BaseNode):
+
+You write layout code once and reuse it across all node types.
+
+Each individual node focuses only on its own logic and UI, not the structure.
+
+Easy to add new nodes — just plug them into the BaseNode.
+---------------------------------------------------------------------------
+
+What is BaseNode?
+BaseNode is a reusable, abstract component that wraps the UI structure and logic common to all node components.
+
+It handles:
+
+The layout box for the node.
+
+Input and output handles (reactflow handles).
+
+Node title.
+
+Optional styling (like border color).
+
+Rendering custom child components via props.children.
+-----------------------------------------------------------------
+
+Updated Existing Nodes to Use BaseNode
+Replaced repetitive JSX in old nodes like InputNode, LLMNode, OutputNode, TextNode with BaseNode abstraction:
+
+=> InputNode
+
+=> TextNode
+
+=> LLMNode
+
+=> OutputNode
+
+Each node now focuses only on its internal logic and UI, letting BaseNode handle structure and connections.
+---------------------------------------------------------------------------
+
+Created 5 New Custom Node Files
+All nodes use BaseNode and follow a clean structure:
+
+=> MathNode: Takes two inputs a and b, calculates and displays a + b.
+
+=> LoggerNode: Logs any input it receives.
+
+=> DateNode: Continuously displays the current date and time.
+
+=> APINode: Allows user to input a URL, fetches and displays JSON response on button click.
+
+=> CustomTextNode: Lets the user input custom text and display it upon pressing a submit button.
+-------------------------------------------------------------------------------------------------------
+
+Styling & Toolbar Integration
+Integrated all new nodes into the toolbar for drag-and-drop functionality.
+
+Applied consistent styling using:
+
+Input field width handling
+
+Button spacing
+
+Font size and overflow handling in long outputs (like API response)
+
+Advanced TextNode Logic
+=> Auto-Resizing:
+Made the text input in TextNode auto-expand vertically as users type more content.
+
+=> Dynamic Input Handles:
+Implemented regex logic to detect variables inside double curly brackets ({{variable}}) from the text.
+
+Automatically adds a new input Handle for each unique variable used.
+------------------------------------------------------------------------------------
+Backend Integration (FastAPI)
+Created an endpoint /pipelines/parse in the FastAPI backend.
+
+Used Pydantic models to validate nodes and edges from the frontend.
+
+Applied Kahn’s Algorithm to check if the graph is a DAG (Directed Acyclic Graph).
+----------------------------------------------------------------------------------------
+Frontend <=> Backend Bridge:
+Modified submit.js to:
+
+Get nodes and edges from React Flow.
+
+Send them via POST to backend.
+
+Show result in an alert with:
+
+Number of nodes
+
+Number of edges
+
+Whether the pipeline is a DAG
+--------------------------------------------------------------------------------------------
+Final Output
+Users can drag-and-drop nodes, configure them, run logic visually, and check graph structure via backend validation.
+
+Modular, reusable, and extensible architecture using component abstraction (BaseNode) and isolated logic per node.
+
+here in this file i have explained steps i followed to do this project 
+
+this is it thank you 
